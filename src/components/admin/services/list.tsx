@@ -1,7 +1,7 @@
 import { forwardRef, useImperativeHandle, useState, useEffect } from "react"
 import { supabase } from "../../../utils/supabase"
 
-const ListServices = forwardRef(({ onEdit }: { onEdit: (service: any) => void }, ref) => {
+const ListServices = forwardRef(({ onEdit, onDelete }: { onEdit: (service: any) => void; onDelete: (service: any) => void }, ref) => {
 	const [services, setServices] = useState<any[]>([])
 	const [filteredServices, setFilteredServices] = useState<any[]>([])
 	const [error, setError] = useState<any>(null)
@@ -61,8 +61,11 @@ const ListServices = forwardRef(({ onEdit }: { onEdit: (service: any) => void },
 							<tr key={service.id}>
 								<td>{service.name}</td>
 								<td>
-									<button onClick={() => onEdit(service)} className='bg-blue-500 text-white px-2 py-1 rounded'>
+									<button onClick={() => onEdit(service)} className='bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-700'>
 										Editar
+									</button>
+									<button onClick={() => onDelete(service)} className='bg-red-500 text-white px-2 py-1 rounded hover:bg-red-700'>
+										Excluir
 									</button>
 								</td>
 							</tr>
